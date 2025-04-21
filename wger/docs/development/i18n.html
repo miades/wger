@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internationalization (i18n) &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Internationalization (i18n)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/development/i18n.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="internationalization-i18n">
+<span id="i18n"></span><h1>Internationalization (i18n)<a class="headerlink" href="#internationalization-i18n" title="Link to this heading"></a></h1>
+<section id="updating-the-translation-files">
+<h2>Updating the translation files<a class="headerlink" href="#updating-the-translation-files" title="Link to this heading"></a></h2>
+<p>wger uses Django’s translation infrastructure, but there are a couple of things
+that need to be considered. First, you need to extract some translatable strings
+from the database such as exercise categories and muscle names:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">extract</span><span class="o">-</span><span class="n">i18n</span>
+</pre></div>
+</div>
+<p>Then, update your po files with the usual Django command (run this in the wger
+sub folder, not the root one):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">makemessages</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">extension</span> <span class="n">py</span><span class="p">,</span><span class="n">html</span><span class="p">,</span><span class="n">tpl</span>
+</pre></div>
+</div>
+<p>and finally, you can compile them with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">compilemessages</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-new-languages">
+<h2>Adding new languages<a class="headerlink" href="#adding-new-languages" title="Link to this heading"></a></h2>
+<p>Besides adding the new translations to the locale folder, they have to be
+activated in the Django settings file and in the application itself.</p>
+<ul>
+<li><p><strong>django:</strong> add an entry to <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> in <code class="docutils literal notranslate"><span class="pre">wger/settings_global.py</span></code></p></li>
+<li><p><strong>wger:</strong> add the new language in the language admin page and set the
+visibility of exercises and ingredients. For the short name, use the
+language code such as ‘fr’, for the long name the native name, in this example
+‘français’.</p></li>
+<li><p><strong>compile</strong>: to use the new language files, the translation files have to be
+compiled. Do this by changing to the wger folder (so you see a <code class="docutils literal notranslate"><span class="pre">locale</span></code>
+folder there) and invoking <code class="docutils literal notranslate"><span class="pre">django-admin</span> <span class="pre">compilemessages</span></code>. You will also
+need to restart the webserver.</p></li>
+<li><p><strong>flag icon:</strong> add an appropriate flag icon in SVG format in <code class="docutils literal notranslate"><span class="pre">images/icons/flag-CODE.svg</span></code>
+in the static folder of the core application.</p></li>
+<li><p><strong>fixtures:</strong> after having added the language in the admin module, the data
+has to be exported so the current language configuration can be reproduced.
+This is done with the <code class="docutils literal notranslate"><span class="pre">filter-fixtures.py</span></code> script:</p>
+<ul>
+<li><p>while in <code class="docutils literal notranslate"><span class="pre">extras/scripts</span></code>, export the whole database to a JSON file with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">../../</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="o">--</span><span class="n">indent</span> <span class="mi">4</span> <span class="o">--</span><span class="n">natural</span><span class="o">-</span><span class="n">foreign</span> <span class="o">&gt;</span> <span class="n">data</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</li>
+<li><p>filter the database dump, this will generate a json file for each “important”
+module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="nb">filter</span><span class="o">-</span><span class="n">fixtures</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</li>
+<li><p>copy the generated files <code class="docutils literal notranslate"><span class="pre">languages.json</span></code> and <code class="docutils literal notranslate"><span class="pre">language_config.json</span></code> to
+the fixtures folder in core and config (you’ll probably want to delete the
+remaining JSON files):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">languages</span><span class="o">.</span><span class="n">json</span> <span class="o">../../</span><span class="n">wger</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">fixtures</span><span class="o">/</span>
+<span class="n">cp</span> <span class="n">language_config</span><span class="o">.</span><span class="n">json</span> <span class="o">../../</span><span class="n">wger</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">fixtures</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">*.</span><span class="n">json</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="getting-new-languages">
+<h2>Getting new languages<a class="headerlink" href="#getting-new-languages" title="Link to this heading"></a></h2>
+<p>If you have a local installation and new languages arrive from upstream, you
+need to load the necessary data to the language tables in the database (note
+that you’ll need to reload/restart the webserver so the new po files are picked
+up):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">languages</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">language_config</span>
+</pre></div>
+</div>
+<p>Please note that this will overwrite any changes you might have done from the
+language administration module.</p>
+</section>
+<section id="server-translations">
+<h2>Server translations<a class="headerlink" href="#server-translations" title="Link to this heading"></a></h2>
+<p>There are a handful of translations that are not part of the Django translation
+files, but are saved in the db instead. These are things like categories and
+muscles. These can be extracted to be used in the Django, react and flutter
+applications with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">extract</span><span class="o">-</span><span class="n">i18n</span>
+</pre></div>
+</div>
+<p>This command will generate the following files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wger/i18n.tpl</span></code>: this allows the django makemessages command to extract
+the strings so they can be translated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wger/i18n.tsx</span></code>: this should be copied to the react repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wger/app_en.arb</span></code> and <code class="docutils literal notranslate"><span class="pre">wger/i18n.dart</span></code>: the content of this file should be copied to
+the end of the <code class="docutils literal notranslate"><span class="pre">intl_en.arb</span></code> file in the flutter repository.</p></li>
+</ul>
+<p>Yes, this process is by far not optimal and should definitely be changed one
+of these days, however these translations are <em>very rarely</em> updated so this
+is kinda ok. The downside is that local instances can’t easily add new
+categories or muscles.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

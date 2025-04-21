@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gym administration" href="gym.html" />
+    <link rel="prev" title="Commands" href="commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Settings</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/administration/settings.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="settings">
+<span id="id1"></span><h1>Settings<a class="headerlink" href="#settings" title="Link to this heading"></a></h1>
+<p>You can configure some of the application behaviour with the <code class="docutils literal notranslate"><span class="pre">WGER_SETTINGS</span></code>
+dictionary in your settings file. Currently, the following options are supported:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ALLOW_GUEST_USERS</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+<p>Controls whether users can use the site as a guest user or if an administrator
+has to create the user accounts, as with the option above.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ALLOW_REGISTRATION</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+<p>Controls whether users can register on their own or if a gym administrator has
+to create the user accounts.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DOWNLOAD_INGREDIENTS_FROM</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">WGER</span></code></p>
+<p>Where to download ingredient images from. Set to ‘None’ to deactivate.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EMAIL_FROM</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">wger</span> <span class="pre">Workout</span> <span class="pre">Manager</span> <span class="pre">&lt;wger&#64;example.com&gt;</span></code></p>
+<p>The sender address used for sent emails by the system such as weight reminders</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EXERCISE_CACHE_TTL</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">3600</span></code> (one hour)</p>
+<p>Sets how long the overview responses for exercise, exerciseinfo and exercisebaseinfo
+are cached for.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">INGREDIENT_CACHE_TTL</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">604800</span></code> (one week)</p>
+<p>Sets how long the overview responses for ingredients are cached for.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ROUTINE_CACHE_TTL</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">*</span> <span class="pre">604800</span></code> (four weeks)</p>
+<p>Sets how long the overview responses for routines are cached for.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MIN_ACCOUNT_AGE_TO_TRUST</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">21</span></code></p>
+<p>Users won’t be able to contribute to exercises if their account age is
+lower than this amount in days.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SYNC_EXERCISES_CELERY</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p>Whether to periodically synchronize the exercise database from the default wger
+instance. Needs celery to be configured.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SYNC_EXERCISE_IMAGES_CELERY</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p>Whether to periodically synchronize the exercise images from the default wger
+instance. Needs celery to be configured.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SYNC_EXERCISE_VIDEOS_CELERY</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<p>Whether to periodically synchronize the exercise videos from the default wger
+instance. Needs celery to be configured.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">USE_CELERY</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Whether celery is configured and can be used</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">USE_RECAPTCHA</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Controls whether a captcha challenge will be presented when new users register.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">WGER_INSTANCE</span></code></dt><dd><p>Default <code class="docutils literal notranslate"><span class="pre">https://wger.de</span></code>.</p>
+<p>The wger instance from which commands like exercise synchronization will use
+to fetch data from.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to override a default setting, don’t overwrite all the dictionary
+but only the keys you need, e.g. <code class="docutils literal notranslate"><span class="pre">WGER_SETTINGS['foo']</span> <span class="pre">=</span> <span class="pre">'bar'</span></code>. This avoids
+problems when new keys are added in the global settings.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="commands.html" class="btn btn-neutral float-left" title="Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gym.html" class="btn btn-neutral float-right" title="Gym administration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

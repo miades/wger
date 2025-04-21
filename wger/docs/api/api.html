@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using the API &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using the routine API" href="routines.html" />
+    <link rel="prev" title="Gym administration" href="../administration/gym.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using the API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="routines.html">Using the routine API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jwt-tokens">JWT Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permanent-token">Permanent Token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pagination">Pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-negotiation">Format negotiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ordering">Ordering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering-resources">Filtering resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using the API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-the-api">
+<span id="api"></span><h1>Using the API<a class="headerlink" href="#using-the-api" title="Link to this heading"></a></h1>
+<p>Public endpoints, such as the list of exercises or the ingredients can be
+accessed without authentication. For user owned objects such as
+routines, you need to authenticate.</p>
+<p>For some info on how to create routines over the API, see</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routines.html">Using the routine API</a></li>
+</ul>
+</div>
+<section id="jwt-tokens">
+<h2>JWT Tokens<a class="headerlink" href="#jwt-tokens" title="Link to this heading"></a></h2>
+<p>This is the suggested way. You generate a temporary token which you send in
+the header with each request that needs authorization</p>
+<ol class="arabic simple">
+<li><p>Get the tokens</p></li>
+</ol>
+<p>Send your username and password to the <code class="docutils literal notranslate"><span class="pre">/api/v2/token</span></code>
+endpoint, you will get an <code class="docutils literal notranslate"><span class="pre">access</span></code> and a <code class="docutils literal notranslate"><span class="pre">refresh</span></code> token
+back:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s1">&#39;https://wger.de/api/v2/token&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;access&#39;</span><span class="p">]</span>
+<span class="n">refresh_token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;refresh&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s1">&#39;refresh&#39;</span><span class="p">:</span> <span class="s1">&#39;eyJhbGciOiJIUzI1...&#39;</span><span class="p">,</span> <span class="s1">&#39;access&#39;</span><span class="p">:</span> <span class="s1">&#39;eyJhbGciOiJIUzI...&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Authenticate</p></li>
+</ol>
+<p>Pass the access token in the Authorization header as <code class="docutils literal notranslate"><span class="pre">&quot;Bearer:</span> <span class="pre">your-token&quot;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;https://wger.de/api/v2/workout/&#39;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;previous&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="o">.....</span>
+</pre></div>
+</div>
+<p>Additionally, you can send the access token to <code class="docutils literal notranslate"><span class="pre">/token/verify/</span></code>
+endpoint to verify it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://wger.de/api/v2/token/verify&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Refresh</p></li>
+</ol>
+<p>When this short-lived access token expires, you can use the longer-lived
+<code class="docutils literal notranslate"><span class="pre">refresh</span></code> token to obtain another access token:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s1">&#39;https://wger.de/api/v2/token/refresh/&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;refresh&#39;</span><span class="p">:</span> <span class="n">refresh_token</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s1">&#39;access&#39;</span><span class="p">:</span> <span class="s1">&#39;eyJhbGciOiJI...&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="permanent-token">
+<h2>Permanent Token<a class="headerlink" href="#permanent-token" title="Link to this heading"></a></h2>
+<p>You can also pass a permanent token in the header to authenticate, but this
+method should be considered deprecated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;abcdef123...&#39;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s1">&#39;https://wger.de/api/v2/routine/&#39;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Token </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;previous&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="o">.....</span>
+</pre></div>
+</div>
+<p>To generate a key, visit the API page on the web app.</p>
+<p>You can also get a permanent token from the <code class="docutils literal notranslate"><span class="pre">login</span></code> endpoint.
+Send a username and password in a POST request. If the user doesn’t
+currently have a token, a new one will be generated for you</p>
+</section>
+<section id="pagination">
+<h2>Pagination<a class="headerlink" href="#pagination" title="Link to this heading"></a></h2>
+<p>By default all results are paginated by 20 elements per page. If you want to
+change this value, add a <code class="docutils literal notranslate"><span class="pre">?limit=&lt;xxx&gt;</span></code> to your query.
+You will find in the answer JSON the <code class="docutils literal notranslate"><span class="pre">next</span></code> and <code class="docutils literal notranslate"><span class="pre">previous</span></code>
+keywords with links to the next or previous result pages.</p>
+</section>
+<section id="format-negotiation">
+<h2>Format negotiation<a class="headerlink" href="#format-negotiation" title="Link to this heading"></a></h2>
+<p>At the moment only JSON and the browsable HTML view are supported. That
+means that you can use the same endpoints from your browser or a client.
+Because of this, for the majority of REST clients it will not be
+necessary to explicitly set the format, but you have the following options:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Set the <strong>Accept</strong> header:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">indent=4</span></code> - useful for debugging, will indent the result</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text/html</span></code> - browsable HTML view, like in the browser</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Set the format <strong>directly in the URL</strong>:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/api/v2/&lt;endpoint&gt;.json/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/api/v2/&lt;endpoint&gt;/?format=json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/api/v2/&lt;endpoint&gt;.api/</span></code> - browsable HTML view</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="ordering">
+<h2>Ordering<a class="headerlink" href="#ordering" title="Link to this heading"></a></h2>
+<p>Simply use <code class="docutils literal notranslate"><span class="pre">?ordering=&lt;fieldname&gt;</span></code> to order by that field.
+You can also specify more than one field name, just give it a list separated
+by commas <code class="docutils literal notranslate"><span class="pre">?ordering=&lt;field1&gt;,&lt;field2&gt;</span></code>. To reverse
+the order use like in django a <code class="docutils literal notranslate"><span class="pre">-</span></code> in front of the field.</p>
+</section>
+<section id="filtering-resources">
+<h2>Filtering resources<a class="headerlink" href="#filtering-resources" title="Link to this heading"></a></h2>
+<p>You can easily filter all resources by specifying the filter queries in the
+URL: <code class="docutils literal notranslate"><span class="pre">?&lt;fieldname&gt;=&lt;value&gt;</span></code>, combinations are possible,
+the filters will be AND-joined:
+<code class="docutils literal notranslate"><span class="pre">&lt;f1&gt;=&lt;v1&gt;&amp;&lt;f2&gt;=&lt;v2&gt;</span></code>.
+Please note that for boolean values you must pass ‘False’ or ‘True’ other
+values, e.g. 1, 0, false, etc. will be ignored. Like with not filtered queries,
+your objects will be available under the ‘results’ key.</p>
+<p>Note that it is not currently possible to specify more than one value, e.g.
+category 1 or 2.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../administration/gym.html" class="btn btn-neutral float-left" title="Gym administration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="routines.html" class="btn btn-neutral float-right" title="Using the routine API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

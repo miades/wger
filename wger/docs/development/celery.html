@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celery &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Celery</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/development/celery.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="celery">
+<span id="id1"></span><h1>Celery<a class="headerlink" href="#celery" title="Link to this heading"></a></h1>
+<p>wger uses a celery queue for some background tasks. At the moment this is used
+for things like fetching the ingredient images or periodically synchronizing the
+exercise database.</p>
+<p>The celery queue is optional and is not required.</p>
+<p>Celery needs a configured cache backend, redis is a good and easy solution and
+you might already have it running for the regular application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CELERY_BROKER_URL</span> <span class="o">=</span> <span class="s2">&quot;redis://localhost:6379/2&quot;</span>
+<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;redis://localhost:6379/2&quot;</span>
+</pre></div>
+</div>
+<p>Finally, set the option in settings.py to use it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WGER_SETTINGS</span><span class="p">[</span><span class="s1">&#39;USE_CELERY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>For alternatives, consult celery’s documentation: <a class="reference external" href="https://docs.celeryq.dev/en/stable/">https://docs.celeryq.dev/en/stable/</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The docker compose file has all services already configured, you don’t need
+to do anything. These installation instructions are only for a manual setup.</p>
+</div>
+<section id="celery-worker">
+<h2>Celery worker<a class="headerlink" href="#celery-worker" title="Link to this heading"></a></h2>
+<p>For development, to start the celery worker just run in your virtual env:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">wger</span> <span class="n">worker</span> <span class="o">-</span><span class="n">l</span> <span class="n">INFO</span>
+</pre></div>
+</div>
+<p>In a production setting you will need to properly daemonize the service. One
+option is a systemd service file. If you are using the structure and names used
+in the production chapter of this documentation, you can proceed as follows.</p>
+<p>Create a folder in where we will put the configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">celery</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Create a configuration file called <code class="docutils literal notranslate"><span class="pre">conf</span></code> and paste this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name of nodes to start</span>
+<span class="n">CELERYD_NODES</span><span class="o">=</span><span class="s2">&quot;w1&quot;</span>
+
+<span class="c1"># Absolute path to the &#39;celery&#39; command within the venv</span>
+<span class="n">CELERY_BIN</span><span class="o">=</span><span class="s2">&quot;/home/wger/venv/bin/celery&quot;</span>
+
+<span class="c1"># App instance to use</span>
+<span class="n">CELERY_APP</span><span class="o">=</span><span class="s2">&quot;wger&quot;</span>
+
+<span class="c1"># How to call manage.py</span>
+<span class="n">CELERYD_MULTI</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span>
+
+<span class="c1"># Extra command-line arguments to the worker</span>
+<span class="n">CELERYD_OPTS</span><span class="o">=</span><span class="s2">&quot;--time-limit=300 --concurrency=8&quot;</span>
+
+<span class="c1"># - %n will be replaced with the first part of the nodename.</span>
+<span class="c1"># - %I will be replaced with the current child process index</span>
+<span class="c1">#   and is important when using the prefork pool to avoid race conditions.</span>
+<span class="n">CELERYD_PID_FILE</span><span class="o">=</span><span class="s2">&quot;/var/run/celery/%n.pid&quot;</span>
+<span class="n">CELERYD_LOG_FILE</span><span class="o">=</span><span class="s2">&quot;/var/log/celery/%n%I.log&quot;</span>
+<span class="n">CELERYD_LOG_LEVEL</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span>
+
+<span class="n">CELERYBEAT_PID_FILE</span><span class="o">=</span><span class="s2">&quot;/var/run/celery/beat.pid&quot;</span>
+<span class="n">CELERYBEAT_LOG_FILE</span><span class="o">=</span><span class="s2">&quot;/var/log/celery/beat.log&quot;</span>
+</pre></div>
+</div>
+<p>Since we’re running this as the wger user, we need to make sure the process can
+write the logs and the pid files. For this edit a new file <code class="docutils literal notranslate"><span class="pre">/etc/tmpfiles.d/celery.conf</span></code>,
+past the following content and reboot the system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">celery</span> <span class="mi">0755</span> <span class="n">wger</span> <span class="n">wger</span> <span class="o">-</span>
+<span class="n">d</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">celery</span> <span class="mi">0755</span> <span class="n">wger</span> <span class="n">wger</span> <span class="o">-</span>
+</pre></div>
+</div>
+<p>Add a new file <cite>/etc/systemd/system/celery.service</cite> with the following contents
+(if you don’t have a redis service or is called differently, adjust as needed):</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Celery Service</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+<span class="na">After</span><span class="o">=</span><span class="s">redis.service</span>
+<span class="na">Requires</span><span class="o">=</span><span class="s">redis.service</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">forking</span>
+<span class="na">User</span><span class="o">=</span><span class="s">wger</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">wger</span>
+<span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">/home/wger/celery/conf</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/wger/src</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/sh -c &#39;${CELERY_BIN} -A $CELERY_APP multi start $CELERYD_NODES </span>\
+<span class="w">    </span><span class="s">--pidfile=${CELERYD_PID_FILE} </span>\
+<span class="w">    </span><span class="s">--logfile=${CELERYD_LOG_FILE} </span>\
+<span class="w">    </span><span class="s">--loglevel=&quot;${CELERYD_LOG_LEVEL}&quot; $CELERYD_OPTS&#39;</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/bin/sh -c &#39;${CELERY_BIN} multi stopwait $CELERYD_NODES </span>\
+<span class="w">    </span><span class="s">--pidfile=${CELERYD_PID_FILE} </span>\
+<span class="w">    </span><span class="s">--logfile=${CELERYD_LOG_FILE} </span>\
+<span class="w">    </span><span class="s">--loglevel=&quot;${CELERYD_LOG_LEVEL}&quot;&#39;</span>
+<span class="na">ExecReload</span><span class="o">=</span><span class="s">/bin/sh -c &#39;${CELERY_BIN} -A $CELERY_APP multi restart $CELERYD_NODES </span>\
+<span class="w">    </span><span class="s">--pidfile=${CELERYD_PID_FILE} </span>\
+<span class="w">    </span><span class="s">--logfile=${CELERYD_LOG_FILE} </span>\
+<span class="w">    </span><span class="s">--loglevel=&quot;${CELERYD_LOG_LEVEL}&quot; $CELERYD_OPTS&#39;</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+<p>Read the file with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code> and start it with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">celery</span></code>.
+If there are no errors and <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">celery</span></code> shows that the service is
+active, everything went well. With <a href="#id2"><span class="problematic" id="id3">``</span></a>systemctl enable celery.service``the service
+will be automatically restarted after a reboot.</p>
+<p>For more up to date information on how this could look like:
+<a class="reference external" href="https://docs.celeryq.dev/en/stable/userguide/daemonizing.html">https://docs.celeryq.dev/en/stable/userguide/daemonizing.html</a></p>
+</section>
+<section id="celery-beat">
+<h2>Celery beat<a class="headerlink" href="#celery-beat" title="Link to this heading"></a></h2>
+<p>Celery beat is used to perform periodic tasks. This is used at the moment to
+regularly sync the exercises from the configured wger instance. A random time
+and day of the week is selected in which the individual task will be run. Each
+task can be toggled on or off with a setting in the <code class="docutils literal notranslate"><span class="pre">WGER_SETTING</span></code> dictionary:</p>
+<ul class="simple">
+<li><p><strong>SYNC_EXERCISES_CELERY</strong> to synchronize the exercises themselves</p></li>
+<li><p><strong>SYNC_EXERCISE_IMAGES_CELERY</strong> to synchronize exercise images</p></li>
+<li><p><strong>SYNC_EXERCISE_VIDEOS_CELERY</strong> to synchronize exercise videos</p></li>
+</ul>
+<p>To start it just run in your virtual env:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">wger</span> <span class="n">beat</span> <span class="o">-</span><span class="n">l</span> <span class="n">INFO</span>
+</pre></div>
+</div>
+<p>To daemonize this you just need to add a new service, e.g.
+<code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/celery-beat.service</span></code>:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Celery Beat Service</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+<span class="na">After</span><span class="o">=</span><span class="s">celery.service</span>
+<span class="na">Requires</span><span class="o">=</span><span class="s">celery.service</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">forking</span>
+<span class="na">User</span><span class="o">=</span><span class="s">wger</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">wger</span>
+<span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">/home/wger/celery-conf/celery</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/home/wger/src</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/sh -c &#39;${CELERY_BIN} -A ${CELERY_APP} beat </span>\
+<span class="w">    </span><span class="s">--pidfile=${CELERYBEAT_PID_FILE} </span>\
+<span class="w">    </span><span class="s">--logfile=${CELERYBEAT_LOG_FILE} </span>\
+<span class="w">    </span><span class="s">--loglevel=${CELERYD_LOG_LEVEL}&#39;</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+<p>Then as above, reload the server and start the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">celery</span><span class="o">-</span><span class="n">beat</span>
+</pre></div>
+</div>
+</section>
+<section id="celery-flower">
+<h2>Celery flower<a class="headerlink" href="#celery-flower" title="Link to this heading"></a></h2>
+<p>Celery flower is a web app that allows you to take a look at the performed tasks</p>
+<p>To start it just run in your virtual env:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">wger</span> <span class="o">--</span><span class="n">broker</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{CELERY_BROKER}</span><span class="s2">&quot;</span> <span class="n">flower</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

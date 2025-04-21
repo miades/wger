@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development with docker &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Development with docker</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/development/docker.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development-with-docker">
+<span id="development-docker"></span><h1>Development with docker<a class="headerlink" href="#development-with-docker" title="Link to this heading"></a></h1>
+<p>Clone <a class="reference external" href="https://github.com/wger-project/docker">https://github.com/wger-project/docker</a> as well
+<a class="reference external" href="https://github.com/wger-project/wger">https://github.com/wger-project/wger</a> to a folder of your choice and
+<code class="docutils literal notranslate"><span class="pre">cd</span></code> in the docker repo into the environment of your choice (dev or dev-postgres)</p>
+<p>Copy <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> to <code class="docutils literal notranslate"><span class="pre">.env</span></code> and set the path to correspond to the location where you
+have checked out the wger server git repo.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>extras/docker/production/settings.py<span class="w"> </span>.
+docker<span class="w"> </span>compose<span class="w"> </span>up
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>/bin/bash
+
+<span class="c1"># this creates initial db tables, runs yarn install, yarn build:css:sass, etc</span>
+wger<span class="w"> </span>bootstrap
+
+<span class="c1"># safe to ignore: Your models in app(s): &#39;exercises&#39;, &#39;nutrition&#39; have changes</span>
+<span class="c1"># that are not yet reflected in a migration, and so won&#39;t be applied.</span>
+python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
+
+<span class="c1"># pull exercises from wger.de (or other source you have defined)</span>
+python3<span class="w"> </span>manage.py<span class="w"> </span>sync-exercises
+
+<span class="c1"># pull nutrition information</span>
+wger<span class="w"> </span>load-online-fixtures
+
+<span class="c1"># if you use sqlite, at this time you can make a backup if you want</span>
+<span class="c1"># such that if you mess something up, you don&#39;t have to start from scratch</span>
+cp<span class="w"> </span>/home/wger/db/database.sqlite<span class="w"> </span>/home/wger/db/database.sqlite.orig
+
+<span class="c1"># finally, this is important, start the actual server!</span>
+python3<span class="w"> </span>manage.py<span class="w"> </span>runserver<span class="w"> </span><span class="m">0</span>.0.0.0:8000
+</pre></div>
+</div>
+<p>You can now login on <a class="reference external" href="http://localhost:8000">http://localhost:8000</a> - there is one user account: admin,
+with password adminadmin. The server should restart automatically when you
+change code, etc.</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">dev</span></code> you can use the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> program to execute queries
+against the database file. For <code class="docutils literal notranslate"><span class="pre">postgres-sqlite</span></code> you can use
+<code class="docutils literal notranslate"><span class="pre">pgcli</span> <span class="pre">-h</span> <span class="pre">localhost</span> <span class="pre">-p</span> <span class="pre">5432</span> <span class="pre">-u</span> <span class="pre">wger</span></code> on your host, with password <cite>wger</cite></p>
+<section id="building-the-image">
+<h2>Building the image<a class="headerlink" href="#building-the-image" title="Link to this heading"></a></h2>
+<p>If you want to build your own image, you can do so by running the following
+commands from the server’s source folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>extras/docker/development/Dockerfile<span class="w"> </span>-t<span class="w"> </span>wger/server<span class="w"> </span>.
+</pre></div>
+</div>
+<p>There is also a “base” image located in <code class="docutils literal notranslate"><span class="pre">extras/docker/base</span></code> which the
+server one uses as a base.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

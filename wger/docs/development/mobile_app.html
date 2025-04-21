@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile App &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Commands" href="../administration/commands.html" />
+    <link rel="prev" title="Frontend" href="frontend.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../production/docker.html">Docker compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../production/installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Frontend</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mobile App</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-app">Building the app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-process">Release process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-screenshots">Updating screenshots</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mobile App</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/development/mobile_app.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mobile-app">
+<span id="id1"></span><h1>Mobile App<a class="headerlink" href="#mobile-app" title="Link to this heading"></a></h1>
+<p>There is a mobile app available for Android and iOS. It’s a flutter application
+and the source code can be found at</p>
+<p><a class="reference external" href="https://github.com/wger-project/flutter">https://github.com/wger-project/flutter</a></p>
+<section id="building-the-app">
+<h2>Building the app<a class="headerlink" href="#building-the-app" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Install flutter (the app currently uses flutter 3.27)</p></li>
+</ol>
+<p><a class="reference external" href="https://docs.flutter.dev/get-started/install">https://docs.flutter.dev/get-started/install</a></p>
+<p>2) Start a wger server. You can either run your own instance
+(see e.g. <a class="reference internal" href="docker.html#development-docker"><span class="std std-ref">Development with docker</span></a>) or use the test server:</p>
+<ul class="simple">
+<li><p>URL: <code class="docutils literal notranslate"><span class="pre">https://wger-master.rge.uber.space</span></code></p></li>
+<li><p>username: <code class="docutils literal notranslate"><span class="pre">user</span></code></p></li>
+<li><p>password: <code class="docutils literal notranslate"><span class="pre">flutteruser</span></code></p></li>
+<li><p>API key: <code class="docutils literal notranslate"><span class="pre">31e2ea0322c07b9df583a9b6d1e794f7139e78d4</span></code></p></li>
+</ul>
+<p>The db is reset every day, so feel free to edit or delete anything.</p>
+<ol class="arabic simple" start="3">
+<li><p>Start the application with <code class="docutils literal notranslate"><span class="pre">flutter</span> <span class="pre">run</span></code> or use your IDE</p></li>
+</ol>
+<p>Please note that depending on how you run your emulator you will need to change
+the IP address of the server.</p>
+<p>You can run the tests with the <code class="docutils literal notranslate"><span class="pre">flutter</span> <span class="pre">test</span></code></p>
+</section>
+<section id="release-process">
+<h2>Release process<a class="headerlink" href="#release-process" title="Link to this heading"></a></h2>
+<p>The release process itself is automated with github actions and fastlane, however
+there are some manual steps involved to prepare the release:</p>
+<ol class="arabic simple">
+<li><p>Update flutter version</p></li>
+</ol>
+<p>If we use a new version, update the version in</p>
+<ul class="simple">
+<li><p>this file</p></li>
+<li><p>Github Actions in <code class="docutils literal notranslate"><span class="pre">build-release.yml</span></code> in <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code></p></li>
+<li><p>If needed, update the F-droid build recipe in <a class="reference external" href="https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/de.wger.flutter.yml">https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/de.wger.flutter.yml</a></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Dry-run release before uploading</p></li>
+</ol>
+<p>We use <a class="reference external" href="https://fastlane.tools/">fastlane</a> to automate the release process. To
+test the release process, install it first and then</p>
+<ul class="simple">
+<li><p>Increase build nr in pubspec.yaml (revert after the dry-run was successful)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flutter</span> <span class="pre">build</span> <span class="pre">appbundle</span> <span class="pre">--release</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">install</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">update</span> <span class="pre">fastlane</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">exec</span> <span class="pre">fastlane</span> <span class="pre">android</span> <span class="pre">test_configuration</span></code> (needs the different
+publishing keys available)</p></li>
+</ul>
+<p>It might be necessary to repeat these steps if upload_to_play_store returns any errors
+such as a missing title or similar.</p>
+<p>Also note that if a language was added over the weblate UI, it might be necessary
+to set the correct language code:</p>
+<p><a class="reference external" href="https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zippy=%2Cview-list-of-available-languages">https://support.google.com/googleplay/android-developer/answer/9844778?hl=en#zippy=%2Cview-list-of-available-languages</a></p>
+<ol class="arabic simple" start="3">
+<li><p>Push tags to trigger release</p></li>
+</ol>
+<p>Make sure that the commit that will be tagged was already pushed or didn’t change
+any dart code, otherwise the automatic linter might push a “correction” commit
+and the build step will fail.</p>
+<p>Set the vX.Y.Z tag locally, push it and delete it. It will get recreated to X.Y.Z.
+by github actions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>TAG=vX.Y.Z &amp;&amp; git tag $TAG &amp;&amp; git push origin $TAG &amp;&amp; git tag -d $TAG
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Edit release</p></li>
+</ol>
+<p>If necessary, edit the created release on github, e.g. to generate the release notes from
+the pull requests.</p>
+<ol class="arabic simple" start="5">
+<li><p>Merge pull requests</p></li>
+</ol>
+<ul class="simple">
+<li><p>in the flathub
+repo: <a class="reference external" href="https://github.com/flathub/de.wger.flutter/compare/master...wger-project:de.wger.flutter:master">https://github.com/flathub/de.wger.flutter/compare/master…wger-project:de.wger.flutter:master</a></p></li>
+<li><p>in the flutter repo: <a class="reference external" href="https://github.com/wger-project/flutter/branches">https://github.com/wger-project/flutter/branches</a></p></li>
+<li><p>in the fork, sync master <a class="reference external" href="https://github.com/wger-project/de.wger.flutter">https://github.com/wger-project/de.wger.flutter</a></p></li>
+</ul>
+</section>
+<section id="updating-screenshots">
+<h2>Updating screenshots<a class="headerlink" href="#updating-screenshots" title="Link to this heading"></a></h2>
+<p>There are different screenshots for the different platforms and languages. They
+are in fastlane/metadata/android/ and can be automatically generated. To do so,
+consult <code class="docutils literal notranslate"><span class="pre">integration_test/README.md</span></code> in the flutter repo.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="frontend.html" class="btn btn-neutral float-left" title="Frontend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../administration/commands.html" class="btn btn-neutral float-right" title="Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

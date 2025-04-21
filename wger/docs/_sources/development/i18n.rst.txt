@@ -1,0 +1,105 @@
+.. _i18n:
+
+Internationalization (i18n)
+===========================
+
+Updating the translation files
+-------------------------------
+
+wger uses Django's translation infrastructure, but there are a couple of things
+that need to be considered. First, you need to extract some translatable strings
+from the database such as exercise categories and muscle names::
+
+    python manage.py extract-i18n
+
+Then, update your po files with the usual Django command (run this in the wger
+sub folder, not the root one)::
+
+    django-admin makemessages --all --extension py,html,tpl
+
+
+and finally, you can compile them with::
+
+    django-admin compilemessages
+
+
+Adding new languages
+--------------------
+
+Besides adding the new translations to the locale folder, they have to be
+activated in the Django settings file and in the application itself.
+
+* **django:** add an entry to ``LANGUAGES`` in ``wger/settings_global.py``
+
+* **wger:** add the new language in the language admin page and set the
+  visibility of exercises and ingredients. For the short name, use the
+  language code such as 'fr', for the long name the native name, in this example
+  'français'.
+
+* **compile**: to use the new language files, the translation files have to be
+  compiled. Do this by changing to the wger folder (so you see a ``locale``
+  folder there) and invoking ``django-admin compilemessages``. You will also
+  need to restart the webserver.
+
+* **flag icon:** add an appropriate flag icon in SVG format in ``images/icons/flag-CODE.svg``
+  in the static folder of the core application.
+
+* **fixtures:** after having added the language in the admin module, the data
+  has to be exported so the current language configuration can be reproduced.
+  This is done with the ``filter-fixtures.py`` script:
+
+  * while in ``extras/scripts``, export the whole database to a JSON file with::
+
+      python ../../manage.py dumpdata --indent 4 --natural-foreign > data.json
+
+  * filter the database dump, this will generate a json file for each "important"
+    module::
+
+      python filter-fixtures.py
+
+  * copy the generated files ``languages.json`` and ``language_config.json`` to
+    the fixtures folder in core and config (you'll probably want to delete the
+    remaining JSON files)::
+
+      cp languages.json ../../wger/core/fixtures/
+      cp language_config.json ../../wger/config/fixtures/
+      rm *.json
+
+
+Getting new languages
+---------------------
+
+If you have a local installation and new languages arrive from upstream, you
+need to load the necessary data to the language tables in the database (note
+that you'll need to reload/restart the webserver so the new po files are picked
+up)::
+
+  python manage.py loaddata languages
+  python manage.py loaddata language_config
+
+Please note that this will overwrite any changes you might have done from the
+language administration module.
+
+
+Server translations
+-------------------
+
+There are a handful of translations that are not part of the Django translation
+files, but are saved in the db instead. These are things like categories and
+muscles. These can be extracted to be used in the Django, react and flutter
+applications with the following command::
+
+  python manage.py extract-i18n
+
+This command will generate the following files:
+
+* ``wger/i18n.tpl``: this allows the django makemessages command to extract
+  the strings so they can be translated.
+* ``wger/i18n.tsx``: this should be copied to the react repository.
+* ``wger/app_en.arb`` and ``wger/i18n.dart``: the content of this file should be copied to
+  the end of the ``intl_en.arb`` file in the flutter repository.
+
+Yes, this process is by far not optimal and should definitely be changed one
+of these days, however these translations are *very rarely* updated so this
+is kinda ok. The downside is that local instances can't easily add new
+categories or muscles.

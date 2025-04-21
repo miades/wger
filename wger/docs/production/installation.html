@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual installation &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Backend" href="../development/backend.html" />
+    <link rel="prev" title="Docker compose" href="docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker compose</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wger-user">Wger user</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apache">Apache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#email">Email</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#site-settings">Site Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-changes">Other changes</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Manual installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/production/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manual-installation">
+<span id="installation"></span><h1>Manual installation<a class="headerlink" href="#manual-installation" title="Link to this heading"></a></h1>
+<p>Install <code class="docutils literal notranslate"><span class="pre">npm</span></code>, <code class="docutils literal notranslate"><span class="pre">yarn</span></code> (1.x) and <code class="docutils literal notranslate"><span class="pre">sass</span></code></p>
+<p>If you plan to use video files, it’s recommended you install ffmpeg as well
+(not that this is not sctrictly necessary, it’s just used for better upload
+validation as well as the extraction of some information from the video files
+such as resulution, codec, etc):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">ffmpeg</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">ffmpeg</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+<section id="wger-user">
+<h2>Wger user<a class="headerlink" href="#wger-user" title="Link to this heading"></a></h2>
+<p>It is recommended to add a dedicated user for the application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">adduser</span> <span class="n">wger</span> <span class="o">--</span><span class="n">disabled</span><span class="o">-</span><span class="n">password</span> <span class="o">--</span><span class="n">gecos</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The following steps assume you did, but it is not necessary (nor is it
+necessary to call it ‘wger’). In that case, change the paths as needed.</p>
+</section>
+<section id="apache">
+<h2>Apache<a class="headerlink" href="#apache" title="Link to this heading"></a></h2>
+<p>Install apache and the WSGI module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">apache2</span> <span class="n">libapache2</span><span class="o">-</span><span class="n">mod</span><span class="o">-</span><span class="n">wsgi</span><span class="o">-</span><span class="n">py3</span>
+<span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">wger</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Configure apache to serve the application:</p>
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Directory</span><span class="w"> </span><span class="s">/home/wger/src</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Files</span><span class="w"> </span><span class="s">wsgi.py</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nb">Require</span><span class="w"> </span><span class="k">all</span><span class="w"> </span>granted
+<span class="w">    </span><span class="nt">&lt;/Files&gt;</span>
+<span class="nt">&lt;/Directory&gt;</span>
+
+
+<span class="nt">&lt;VirtualHost</span><span class="w"> </span><span class="s">*:80</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nb">WSGIApplicationGroup</span><span class="w"> </span>%{GLOBAL}
+<span class="w">    </span><span class="nb">WSGIDaemonProcess</span><span class="w"> </span>wger<span class="w"> </span>python-path=/home/wger/src<span class="w"> </span>python-home=/home/wger/venv
+<span class="w">    </span><span class="nb">WSGIProcessGroup</span><span class="w"> </span>wger
+<span class="w">    </span><span class="nb">WSGIScriptAlias</span><span class="w"> </span>/<span class="w"> </span><span class="sx">/home/wger/src/wger/wsgi.py</span>
+<span class="w">    </span><span class="nb">WSGIPassAuthorization</span><span class="w"> </span><span class="k">On</span>
+
+<span class="w">    </span><span class="nb">Alias</span><span class="w"> </span><span class="sx">/static/</span><span class="w"> </span><span class="sx">/home/wger/static/</span>
+<span class="w">    </span><span class="nt">&lt;Directory</span><span class="w"> </span><span class="s">/home/wger/static</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nb">Require</span><span class="w"> </span><span class="k">all</span><span class="w"> </span>granted
+<span class="w">    </span><span class="nt">&lt;/Directory&gt;</span>
+
+<span class="w">    </span><span class="nb">Alias</span><span class="w"> </span><span class="sx">/media/</span><span class="w"> </span><span class="sx">/home/wger/media/</span>
+<span class="w">    </span><span class="nt">&lt;Directory</span><span class="w"> </span><span class="s">/home/wger/media</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nb">Require</span><span class="w"> </span><span class="k">all</span><span class="w"> </span>granted
+<span class="w">    </span><span class="nt">&lt;/Directory&gt;</span>
+
+<span class="w">    </span><span class="nb">ErrorLog</span><span class="w"> </span>${APACHE_LOG_DIR}/wger-error.log
+<span class="w">    </span><span class="nb">CustomLog</span><span class="w"> </span>${APACHE_LOG_DIR}/wger-access.log<span class="w"> </span>combined
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+<p>Apache has a problem when uploading files that have non-ASCII characters, e.g.
+for exercise images. To avoid this, add to /etc/apache2/envvars (if there is
+already an <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">LANG</span></code>, replace it) or set your system’s locale:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LANG</span><span class="o">=</span><span class="s1">&#39;en_US.UTF-8&#39;</span>
+<span class="n">export</span> <span class="n">LC_ALL</span><span class="o">=</span><span class="s1">&#39;en_US.UTF-8&#39;</span>
+</pre></div>
+</div>
+<p>Activate the settings and disable apache’s default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">a2dissite</span> <span class="mi">000</span><span class="o">-</span><span class="n">default</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">sudo</span> <span class="n">a2ensite</span> <span class="n">wger</span>
+<span class="n">sudo</span> <span class="n">service</span> <span class="n">apache2</span> <span class="n">reload</span>
+</pre></div>
+</div>
+</section>
+<section id="database">
+<h2>Database<a class="headerlink" href="#database" title="Link to this heading"></a></h2>
+<p id="prod-postgres"><strong>PostgreSQL</strong></p>
+<p>Install the Postgres server (choose the appropriate and currently supported version
+for your distro) and create a database and a user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">postgresql</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">dev</span><span class="o">-</span><span class="mi">12</span> <span class="n">python3</span><span class="o">-</span><span class="n">psycopg2</span>
+<span class="n">sudo</span> <span class="n">su</span> <span class="o">-</span> <span class="n">postgres</span>
+<span class="n">createdb</span> <span class="n">wger</span>
+<span class="n">psql</span> <span class="n">wger</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;CREATE USER wger WITH PASSWORD &#39;wger&#39;&quot;</span><span class="p">;</span>
+<span class="n">psql</span> <span class="n">wger</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;GRANT ALL PRIVILEGES ON DATABASE wger to wger&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You might want or need to edit your <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> file to allow local socket
+connections or similar.</p>
+<p><strong>SQLite</strong></p>
+<p>If using sqlite, create a folder for it (must be writable by the apache user):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">database</span><span class="o">.</span><span class="n">sqlite</span>
+<span class="n">chown</span> <span class="p">:</span><span class="n">www</span><span class="o">-</span><span class="n">data</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span>
+<span class="n">chmod</span> <span class="n">g</span><span class="o">+</span><span class="n">w</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">database</span><span class="o">.</span><span class="n">sqlite</span>
+</pre></div>
+</div>
+</section>
+<section id="application">
+<h2>Application<a class="headerlink" href="#application" title="Link to this heading"></a></h2>
+<p>As the wger user, make a virtualenv for python and activate it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">venv</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Create folders to collect all static resources and save uploaded files. The
+<code class="docutils literal notranslate"><span class="pre">static</span></code> folder will only contain CSS and JS files, so it must be readable
+by the apache process while <code class="docutils literal notranslate"><span class="pre">media</span></code> will contain the uploaded files and must
+be writeable as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="p">{</span><span class="n">static</span><span class="p">,</span><span class="n">media</span><span class="p">}</span>
+<span class="n">chmod</span> <span class="n">o</span><span class="o">+</span><span class="n">w</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">media</span>
+</pre></div>
+</div>
+<p>Get the application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wger</span><span class="o">-</span><span class="n">project</span><span class="o">/</span><span class="n">wger</span><span class="o">.</span><span class="n">git</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">src</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">src</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_prod</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+
+<span class="c1"># If using sqlite without the --database-path</span>
+<span class="n">wger</span> <span class="n">create</span><span class="o">-</span><span class="n">settings</span> <span class="o">--</span><span class="n">database</span><span class="o">-</span><span class="n">path</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wger</span><span class="o">/</span><span class="n">db</span><span class="o">/</span><span class="n">database</span><span class="o">.</span><span class="n">sqlite</span>
+</pre></div>
+</div>
+<p>Edit the generated settings file (<code class="docutils literal notranslate"><span class="pre">/home/wger/src/settings.py</span></code>)</p>
+<ul class="simple">
+<li><p>Add the correct values for the database (use <code class="docutils literal notranslate"><span class="pre">django.db.backends.postgresql</span></code>
+for the engine) if you are using postgres</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">MEDIA_ROOT</span></code> to <code class="docutils literal notranslate"><span class="pre">/home/wger/media</span></code> and <code class="docutils literal notranslate"><span class="pre">STATIC_ROOT</span></code> to <code class="docutils literal notranslate"><span class="pre">/home/wger/static</span></code>.</p></li>
+<li><p>Add the domains that your site will be accessed to <cite>ALLOWED_HOSTS=[‘example.com’, ‘www.example.com’]</cite>
+(you might want to do this as the last step when you know everything else is
+working correctly)</p></li>
+</ul>
+<p>Run the installation script, this will download some CSS and JS libraries and
+load all initial data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wger</span> <span class="n">bootstrap</span>
+</pre></div>
+</div>
+<p>Collect all static resources:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+<p>The bootstrap command will also create a default administrator user (you probably
+want to change the password as soon as you log in):</p>
+<ul class="simple">
+<li><p><strong>username</strong>: admin</p></li>
+<li><p><strong>password</strong>: adminadmin</p></li>
+</ul>
+</section>
+<section id="email">
+<span id="id1"></span><h2>Email<a class="headerlink" href="#email" title="Link to this heading"></a></h2>
+<p>The application is configured to use Django’s console email backend by default, which causes messages intended to be sent via email to be written to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>.</p>
+<p>In order to use a real email server, another backend listed in <a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/email/#email-backends">Django’s documentation</a> can be configured instead. Parameters for the backend are set as variables in <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>. For example, the following allows an SMTP server at <code class="docutils literal notranslate"><span class="pre">smtp.example.com</span></code> to be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Email_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.smtp.EmailBackend&#39;</span>
+<span class="n">ENABLE_EMAIL</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.example.com&#39;</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;wger@example.com&#39;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;example_password&#39;</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">EMAIL_USE_SSL</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">DEFAULT_FROM_EMAIL</span> <span class="o">=</span> <span class="s1">&#39;wger Workout Manager &lt;wger@example.com&gt;&#39;</span>
+</pre></div>
+</div>
+<p>Django provides a <code class="docutils literal notranslate"><span class="pre">sendtestemail</span></code> command via <code class="docutils literal notranslate"><span class="pre">manage.py</span></code> to test email settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">sendtestemail</span> <span class="n">user</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</section>
+<section id="site-settings">
+<span id="id2"></span><h2>Site Settings<a class="headerlink" href="#site-settings" title="Link to this heading"></a></h2>
+<p>Some wger features make use of Django’s site name and domain settings in the <code class="docutils literal notranslate"><span class="pre">contrib.sites</span></code> framework. These should be set through the Python shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">shell</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Site</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">site</span> <span class="o">=</span> <span class="n">Site</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">site</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;wger.example.com&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">site</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;example.com wger Workout Manager&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">site</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">wger.example.com</span></code> is the domain of the wger instance. This assumes that wger is using the default site ID of 1. If a different site ID is being used, it must be specified in <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SITE_ID</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+<section id="other-changes">
+<span id="id3"></span><h2>Other changes<a class="headerlink" href="#other-changes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>For a description of the available settings consult <a class="reference internal" href="../administration/settings.html#settings"><span class="std std-ref">Settings</span></a>.</p></li>
+<li><p>If you want to use the application as a public instance, you will probably want to
+change the following templates:</p>
+<ul>
+<li><p><strong>tos.html</strong>, for your own Terms Of Service here</p></li>
+<li><p><strong>about.html</strong>, for your contact address or other such legal requirements</p></li>
+</ul>
+</li>
+<li><p>To keep the application updated, regularly pull new changes and</p>
+<ul>
+<li><p>install new or updated dependencies: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
+<li><p>apply new migrations: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span> <span class="pre">--all</span></code></p></li>
+<li><p>update the static files: <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">build:css:sass</span></code>
+and <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">collectstatic</span></code></p></li>
+<li><p>update data <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">sync-exercises</span></code>, <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">download-exercise-images</span></code>
+(something like weekly) and <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">sync-ingredients</span></code> (monthly)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docker.html" class="btn btn-neutral float-left" title="Docker compose" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../development/backend.html" class="btn btn-neutral float-right" title="Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

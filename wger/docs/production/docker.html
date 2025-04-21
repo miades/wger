@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docker compose &mdash; wger project 2.3 alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=07e4ba0c"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Manual installation" href="installation.html" />
+    <link rel="prev" title="Welcome to wger 2.3 documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wger project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation (prod)</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docker compose</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kubernetes">Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#if-you-get-csrf-errors">If you get CSRF errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatically-start-service">Automatically start service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backup">Backup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#postgres-upgrade">Postgres Upgrade</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Manual installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/frontend.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/mobile_app.html">Mobile App</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Administration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../administration/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration/gym.html">Gym administration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Using the API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/routines.html">Using the routine API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">All the rest</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wger project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Docker compose</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/production/docker.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="docker-compose">
+<span id="docker-prod"></span><h1>Docker compose<a class="headerlink" href="#docker-compose" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/wger-project/docker">https://github.com/wger-project/docker</a></p>
+<p>The prod docker compose file starts up a production environment with gunicorn
+as the webserver, postgres as a database and redis for caching with nginx
+used as a reverse proxy.</p>
+<p>The database, static files and uploaded images are mounted as volumes so
+the data is persisted. The only thing you need to do is update the docker
+images. Consult the docker volume command for details on how to access or
+backup this data.</p>
+<p>It is recommended to regularly pull the latest version of the compose file,
+since sometimes new configurations or environmental variables are added.</p>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Link to this heading"></a></h2>
+<p>If you want to deploy the application with Kubernetes instead, consult the helm
+charts repository: <a class="reference external" href="https://github.com/wger-project/helm-charts">https://github.com/wger-project/helm-charts</a></p>
+</section>
+<section id="first-steps">
+<h2>First steps<a class="headerlink" href="#first-steps" title="Link to this heading"></a></h2>
+<p>To start all services:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+<p>Optionally download current exercises, exercise images and the ingredients
+from wger.de. Please note that <code class="docutils literal notranslate"><span class="pre">load-online-fixtures</span></code> will overwrite any local
+changes you might have while <code class="docutils literal notranslate"><span class="pre">sync-ingredients</span></code> should be used afterward once
+you have imported the initial fixtures:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">exec</span> <span class="n">web</span> <span class="n">python3</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">sync</span><span class="o">-</span><span class="n">exercises</span>
+<span class="n">docker</span> <span class="n">compose</span> <span class="n">exec</span> <span class="n">web</span> <span class="n">python3</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">download</span><span class="o">-</span><span class="n">exercise</span><span class="o">-</span><span class="n">images</span>
+<span class="n">docker</span> <span class="n">compose</span> <span class="n">exec</span> <span class="n">web</span> <span class="n">python3</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">download</span><span class="o">-</span><span class="n">exercise</span><span class="o">-</span><span class="n">videos</span>
+
+<span class="c1"># Loads a base set of ingredients</span>
+<span class="n">docker</span> <span class="n">compose</span> <span class="n">exec</span> <span class="n">web</span> <span class="n">wger</span> <span class="n">load</span><span class="o">-</span><span class="n">online</span><span class="o">-</span><span class="n">fixtures</span>
+
+<span class="c1"># optionally run this afterwards to sync all the ingredients (around 1GB,</span>
+<span class="c1"># this process takes a loooong time):</span>
+<span class="n">docker</span> <span class="n">compose</span> <span class="n">exec</span> <span class="n">web</span> <span class="n">python3</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">sync</span><span class="o">-</span><span class="n">ingredients</span><span class="o">-</span><span class="k">async</span>
+</pre></div>
+</div>
+<p>(these steps are configured by default to run regularly in the background, but
+can also run on startup as well, see the options in <code class="docutils literal notranslate"><span class="pre">prod.env</span></code>.)</p>
+<p>Then open <a class="reference external" href="http://localhost">http://localhost</a> (or your server’s IP) and log in as: <strong>admin</strong>,
+password <strong>adminadmin</strong></p>
+<p><strong>Update the application</strong></p>
+<p>Just remove the containers and pull the newest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">pull</span>
+<span class="n">docker</span> <span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+<p><strong>Lifecycle Management</strong></p>
+<p>To stop all services issue a stop command, this will preserve all containers
+and volumes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">stop</span>
+</pre></div>
+</div>
+<p>To start everything up again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>To remove all containers (except for the volumes):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">down</span>
+</pre></div>
+</div>
+<p>To view the logs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">compose</span> <span class="n">logs</span> <span class="o">-</span><span class="n">f</span>
+</pre></div>
+</div>
+<p>You might need to issue other commands or do other manual work in the container,
+e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--user<span class="w"> </span>root<span class="w"> </span>web<span class="w"> </span>/bin/bash
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--user<span class="w"> </span>postgres<span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>wger<span class="w"> </span>-U<span class="w"> </span>wger
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>Instead of editing the compose file or the env file directly, it is recommended
+to extend it. That way you can more easily pull changes from this repository.</p>
+<p>For example, you might not want to run the application on port 80 because some
+other service in your network is already using it. For this, simply create a new
+file called <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code> with the following content</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nginx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:80&quot;</span>
+</pre></div>
+</div>
+<p>Now the port setting will be overwritten from the configured nginx service when
+you do a <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code>. However, note that compose will concatenate both sets
+of values so in this case the application will be binded to 8080 (from the override)
+<em>and</em> 80 (from the regular compose file). It seems that at the moment the only
+workaround is remove the ports settings altogether from the compose file.</p>
+<p>The same applies to the env variables, just create a new file called e.g. <code class="docutils literal notranslate"><span class="pre">my.env</span></code>
+and add it after the provided <code class="docutils literal notranslate"><span class="pre">prod.env</span></code> for the web service (again, this is
+<code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>). There you add the settings that you changed, and only
+those, which makes it easier to troubleshoot, etc.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/prod.env</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/my.env</span>
+</pre></div>
+</div>
+<p>To add a web interface for the celery queue, add a new service to the override file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">celery_flower</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wger/server:latest</span>
+<span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wger_celery_flower</span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/start-flower</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/prod.env</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5555:5555&quot;</span>
+<span class="w">  </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wget --no-verbose --tries=1 http://localhost:5555/healthcheck</span>
+<span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">    </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">celery_worker</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+</pre></div>
+</div>
+<p>For more information and possibilities consult <a class="reference external" href="https://docs.docker.com/compose/extends/">https://docs.docker.com/compose/extends/</a></p>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading"></a></h2>
+<p>The easiest way to deploy this application to prod is to use a reverse proxy like
+nginx or traefik. You can change the port this application exposes and reverse proxy
+your domain to it. For this just edit the “nginx” service in docker-compose.yml and
+set the port to some value, e.g. <cite>“8080:80”</cite> then configure your proxy to forward
+requests to it, e.g. for nginx (no other ports need to be changed, they are used
+only within the application’s docker network):</p>
+<p>Also notice that the application currently needs to run on its own (sub)domain
+and not in a subdirectory, so <cite>location /wger {</cite> will probably only mostly work</p>
+</section>
+<section id="if-you-get-csrf-errors">
+<h2>If you get CSRF errors<a class="headerlink" href="#if-you-get-csrf-errors" title="Link to this heading"></a></h2>
+<p>You will most probably run into CSRF errors when you try to use the application,
+specially if you configured a domain and django’s
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/csrf/">CSRF protection</a> kicks in.
+To solve this, update the env file and either</p>
+<ul class="simple">
+<li><p>manually set a list of your domain names and/or server IPs
+<code class="docutils literal notranslate"><span class="pre">CSRF_TRUSTED_ORIGINS=https://my.domain.example.com,https://118.999.881.119:8008</span></code>
+If you are unsure what origin to add here, set the debug setting to true, restart
+and try again, the error message that appears will have the origin prominently
+displayed. Note: the port is important!
+To know which origins django has a problem with, set set <code class="docutils literal notranslate"><span class="pre">DJANGO_DEBUG</span></code> to true
+and the error message will tell you exactly which origins are problematic.</p></li>
+<li><p>or set the <code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code> header like in the example and set
+<code class="docutils literal notranslate"><span class="pre">X_FORWARDED_PROTO_HEADER_SET=True</span></code>. If you do this consult the
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/ref/settings/#secure-proxy-ssl-header">documentation</a>
+as there are some security considerations.</p></li>
+</ul>
+</section>
+<section id="automatically-start-service">
+<h2>Automatically start service<a class="headerlink" href="#automatically-start-service" title="Link to this heading"></a></h2>
+<p>If everything works correctly, you will want to start the compose file as a
+service so that it auto restarts when you reboot the server. If you use systemd,
+this can be done with a simple file. Create the file <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/wger.service</span></code>
+and enter the following content (check where the absolute path of the docker
+command is with <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">docker</span></code>)</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">wger docker compose service</span>
+<span class="na">PartOf</span><span class="o">=</span><span class="s">docker.service</span>
+<span class="na">After</span><span class="o">=</span><span class="s">docker.service</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">true</span>
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/path/to/the/docker/compose/</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/docker compose up -d --remove-orphans</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/bin/docker compose down</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+<p>Read the file with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code> and start it with
+<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">wger</span></code>. If there are no errors and <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">wger</span></code>
+shows that the service is active (this might take some time), everything went
+well. With <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">wger</span></code> the service will be automatically restarted
+after a reboot.</p>
+</section>
+<section id="backup">
+<h2>Backup<a class="headerlink" href="#backup" title="Link to this heading"></a></h2>
+<p><strong>Database volume:</strong> The most important thing to backup. For this just make
+a dump and restore it when needed</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stop all other containers so the db is not changed while you export it</span>
+docker<span class="w"> </span>compose<span class="w"> </span>stop<span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>cache<span class="w"> </span>celery_worker<span class="w"> </span>celery_beat
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>pg_dumpall<span class="w"> </span>--clean<span class="w"> </span>--username<span class="w"> </span>wger<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+docker<span class="w"> </span>compose<span class="w"> </span>start
+
+<span class="c1"># When you need to restore it</span>
+docker<span class="w"> </span>compose<span class="w"> </span>stop
+docker<span class="w"> </span>volume<span class="w"> </span>remove<span class="w"> </span>docker_postgres-data
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>db
+cat<span class="w"> </span>backup.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>--username<span class="w"> </span>wger<span class="w"> </span>--dbname<span class="w"> </span>wger
+docker<span class="w"> </span>compose<span class="w"> </span>up
+</pre></div>
+</div>
+<p><strong>Media volume:</strong> If you haven’t uploaded any own images (exercises, gallery),
+you don’t need to backup this, the contents can just be downloaded again. If
+you have, please consult these possibilities:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.docker.com/blog/back-up-and-share-docker-volumes-with-this-extension/">https://www.docker.com/blog/back-up-and-share-docker-volumes-with-this-extension/</a></p></li>
+<li><p><a class="reference external" href="https://github.com/BretFisher/docker-vackup">https://github.com/BretFisher/docker-vackup</a></p></li>
+</ul>
+<p><strong>Static volume:</strong> The contents of this volume are 100% generated and recreated
+on startup, no need to backup anything</p>
+</section>
+<section id="postgres-upgrade">
+<h2>Postgres Upgrade<a class="headerlink" href="#postgres-upgrade" title="Link to this heading"></a></h2>
+<p>It is sadly not possible to automatically upgrade between postgres versions,
+you need to perform the upgrade manually. Since the amount of data the app
+generates is small a simple dump and restore is the simplest way to do this.</p>
+<p>If you pulled new changes from this repo and got the error message “The data
+directory was initialized by PostgreSQL version 12, which is not compatible
+with this version 15.” this is for you.</p>
+<p>See also <a class="reference external" href="https://github.com/docker-library/postgres/issues/37">https://github.com/docker-library/postgres/issues/37</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Checkout the last version of the composer file that uses postgres 12</span>
+git<span class="w"> </span>checkout<span class="w"> </span>pg-12
+
+<span class="c1"># Stop all other containers</span>
+docker<span class="w"> </span>compose<span class="w"> </span>stop<span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>cache<span class="w"> </span>celery_worker<span class="w"> </span>celery_beat
+
+<span class="c1"># Make a dump of the database and remove the container and volume</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>pg_dumpall<span class="w"> </span>--clean<span class="w"> </span>--username<span class="w"> </span>wger<span class="w"> </span>&gt;<span class="w"> </span>backup.sql
+docker<span class="w"> </span>compose<span class="w"> </span>stop<span class="w"> </span>db
+docker<span class="w"> </span>compose<span class="w"> </span>down
+docker<span class="w"> </span>volume<span class="w"> </span>remove<span class="w"> </span>docker_postgres-data
+
+<span class="c1"># Checkout current version, import the dump and start everything</span>
+git<span class="w"> </span>checkout<span class="w"> </span>master
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>db
+cat<span class="w"> </span>backup.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>--username<span class="w"> </span>wger<span class="w"> </span>--dbname<span class="w"> </span>wger
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>--username<span class="w"> </span>wger<span class="w"> </span>--dbname<span class="w"> </span>wger<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;ALTER USER wger WITH PASSWORD &#39;wger&#39;&quot;</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up
+rm<span class="w"> </span>backup.sql
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to wger 2.3 documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Manual installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roland Geider.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
